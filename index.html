@@ -190,8 +190,77 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/02/04/Go/" target="_self">
+          Go语法基础（六）：并发,并行
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/04/Go/" target="_self">
+          
+          
+            
+          
+          1.触发go程:go+函数名2.退出
+return 返回当前函数
+
+GOEXIT 提前退出当前go程
+
+exit 退出当前进程
+
+
+3.多go程通信
+解决互斥量使用时
+
+1.无缓冲管道
+初始化：numChan := make(chan int) 
+
+从管道里读数据: data&lt;-numChan
+
+向管道写数据:  numchan&lt;-1 
+123456789101112131415161
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-04 23:10" pubdate>
+              2022-02-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Go%E7%B3%BB%E5%88%97/">Go系列</a>
+            
+              <a href="/categories/Go%E7%B3%BB%E5%88%97/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">Go语法基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/02/04/Go%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3/" target="_self">
-          Go基础语法（五）：方法与接口
+          Go语法基础（五）：方法与接口
         </a>
       </h1>
 
@@ -201,8 +270,25 @@
           
             
           
-          的
+          1.方法
+区别方法和函数:
+函数:
 
+定义:
+1func Plus (v Vertex) int
+调用
+12v := VertexPlus(v)
+
+方法:
+
+定义:
+1func (v Vertex) Plus() int &#123;
+调用
+12v := Vertexv.Plus()
+
+
+可以为非结构体类型声明方法,但是这个类型的定义和方法声明必须在同一个包内
+例如下面这个函数中, 可以对v内的v
         </a>
       </p>
 

@@ -4,6 +4,87 @@
   
   
   <entry>
+    <title>Go特性学习(一)：module</title>
+    <link href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/"/>
+    <url>/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/</url>
+    
+    <content type="html"><![CDATA[<h4 id="module"><a href="#module" class="headerlink" title="module"></a>module</h4><p>module的出现可以让项目不必再将代码放在<code>GOPATH/src</code> 目录里面，可以在项目的目录下创建一个<code>go.mod</code>文件，再从文件树中运行<code>go</code>命令。</p><h4 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h4><p><code>module</code>是一个相关<code>Go</code>包的集合，它是源代码更替和版本控制的单元。模块由源文件形成的<code>go.mod</code>文件的根目录定义。<code>moudles</code>取代旧的的基于GOPATH方法来指定在工程中使用哪些源文件或导入包。模块路径是导入包的路径前缀，go.mod文件定义模块路径，并且列出了在项目构建过程中使用的特定版本。</p><blockquote><p>未完待续</p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>Go系列</category>
+      
+      <category>Go特性学习</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>开发环境（二）：Go编译插件：protobuf&amp;&amp;grpc</title>
+    <link href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/"/>
+    <url>/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/</url>
+    
+    <content type="html"><![CDATA[<ul><li><p>下载protobuf安装包：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-all-3.xx.x.tar.gz<br></code></pre></td></tr></table></figure></li><li><p>解压，注意不要在/usr/local/protobuf文件夹下操作</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar -zxvf protobuf-all-3.xx.x.tar.gz<br></code></pre></td></tr></table></figure></li><li><p>下面编译安装：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs shell">./autogen.sh<br>./configure --prefix=/usr/local/protobuf<br>make<br>make install<br></code></pre></td></tr></table></figure></li><li><p>在<code>/etc/profiile</code>下配置环境变量：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">protobuf config</span><br><span class="hljs-meta"></span><br><span class="hljs-meta">#</span><span class="bash">(动态库搜索路径) 程序加载运行期间查找动态链接库时指定除了系统默认路径之外的其他路径</span><br>export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/protobuf/lib/<br><span class="hljs-meta">#</span><span class="bash">(静态库搜索路径) 程序编译期间查找动态链接库时指定查找共享库的路径</span><br>export LIBRARY_PATH=$LIBRARY_PATH:/usr/local/protobuf/lib/<br><span class="hljs-meta">#</span><span class="bash">执行程序搜索路径</span><br>export PATH=$PATH:/usr/local/protobuf/bin/<br><span class="hljs-meta">#</span><span class="bash">c程序头文件搜索路径</span><br>export C_INCLUDE_PATH=$C_INCLUDE_PATH:/usr/local/protobuf/include/<br><span class="hljs-meta">#</span><span class="bash">c++程序头文件搜索路径</span><br>export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:/usr/local/protobuf/include/<br><span class="hljs-meta">#</span><span class="bash">pkg-config 路径</span><br>export PKG_CONFIG_PATH=/usr/local/protobuf/lib/pkgconfig<br></code></pre></td></tr></table></figure></li><li><p>使配置生效：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">source /etc/profile<br></code></pre></td></tr></table></figure></li><li><p>用以下命令安装Go编译插件<code>protoc-gen-go</code>&amp;&amp;<code>protoc-gen-go-grpc</code></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">go install google.golang.org/protobuf/cmd/protoc-gen-go@latest<br>go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@latest<br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境搭建</category>
+      
+      <category>CentOS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>开发环境（一）：Go</title>
+    <link href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/"/>
+    <url>/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/</url>
+    
+    <content type="html"><![CDATA[<h4 id="二进制文件下载解压"><a href="#二进制文件下载解压" class="headerlink" title="二进制文件下载解压"></a>二进制文件下载解压</h4><ul><li><p>下载二进制文件</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">wget https://dl.google.com/go/go1.xx.x.linux-amd64.tar.gz<br></code></pre></td></tr></table></figure></li><li><p>将文件解压到 <code>/usr/local</code></p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">tar -zxf go1.xx.x.linux-amd64.tar.gz -C /usr/local<br></code></pre></td></tr></table></figure></li></ul><h4 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h4><ul><li><p>环境变量文件在<code>/etc/profile</code> 是永久有效的，将以下配置加入到文件末尾</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash">Go-env config</span><br>export GO111MODULE=on<br>export GOROOT=/usr/local/go <br>export GOPATH=/home/gopath<br>export PATH=$PATH:$GOROOT/bin:$GOPATH/bin<br></code></pre></td></tr></table></figure></li><li><p>其中 <strong><code>GO111MODULE=on</code></strong></p><p>在go1.11后出的一种新的包管理<code>go modules</code>方式代替<code>vendor</code>机制，可以不需要<code>GOPATH</code>，项目代码也不一定要放在<code>GOPATH</code>下面</p></li><li><p><strong><code>export PATH=$PATH:$GOROOT/bin:$GOPATH/bin</code></strong></p><p>将<code>GOROOT</code>添加到系统环境变量, <code>GOROOT=/usr/local/go </code></p></li><li><p>在<code>/home</code>下创建 <code>gopath</code></p><p><code>go get</code>安装的第三方包会在<code>gopath</code>下</p></li><li><p>使环境变量配置生效</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">source /etc/profile<br></code></pre></td></tr></table></figure></li><li><p>Go设置代理环境变量, Go1.13之后才支持direct</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs shell">go env -w GOPROXY=https://goproxy.cn,direct<br></code></pre></td></tr></table></figure></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>环境搭建</category>
+      
+      <category>CentOS</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>Go</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Go语法基础（六）：并发,并行</title>
     <link href="/2022/02/04/Go/"/>
     <url>/2022/02/04/Go/</url>

@@ -190,6 +190,177 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/" target="_self">
+          Go特性学习(一)：module
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/" target="_self">
+          
+          
+            
+          
+          modulemodule的出现可以让项目不必再将代码放在GOPATH/src 目录里面，可以在项目的目录下创建一个go.mod文件，再从文件树中运行go命令。
+概念module是一个相关Go包的集合，它是源代码更替和版本控制的单元。模块由源文件形成的go.mod文件的根目录定义。moudles取代旧的的基于GOPATH方法来指定在工程中使用哪些源文件或导入包。模块路径是导入包的路径前缀，go.mo
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-10 20:35" pubdate>
+              2022-02-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Go%E7%B3%BB%E5%88%97/">Go系列</a>
+            
+              <a href="/categories/Go%E7%B3%BB%E5%88%97/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/">Go特性学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/" target="_self">
+          开发环境（二）：Go编译插件：protobuf&amp;&amp;grpc
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/" target="_self">
+          
+          
+            
+          
+          
+下载protobuf安装包：
+1wget https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-all-3.xx.x.tar.gz
+解压，注意不要在/usr/local/protobuf文件夹下操作
+1tar -zxvf protobuf-all-3.xx.x.tar.gz
+下面编译安装：
+1
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-10 20:20" pubdate>
+              2022-02-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a>
+            
+              <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/CentOS/">CentOS</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/" target="_self">
+          开发环境（一）：Go
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/" target="_self">
+          
+          
+            
+          
+          二进制文件下载解压
+下载二进制文件
+1wget https://dl.google.com/go/go1.xx.x.linux-amd64.tar.gz
+将文件解压到 /usr/local
+1tar -zxf go1.xx.x.linux-amd64.tar.gz -C /usr/local
+
+配置环境变量
+环境变量文件在/etc/profile 是永久有效的，将以下配置加入到文件末尾
+12345
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-10 20:19" pubdate>
+              2022-02-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">环境搭建</a>
+            
+              <a href="/categories/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/CentOS/">CentOS</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/02/04/Go/" target="_self">
           Go语法基础（六）：并发,并行
         </a>

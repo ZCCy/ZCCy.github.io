@@ -190,13 +190,258 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/" target="_self">
+        <a href="/2022/02/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6-1/" target="_self">
+          操作系统学习（二）：进程调度
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6-1/" target="_self">
+          
+          
+            
+          
+          进程调度算法：先来先服务：时间片轮转算法：
+结合了先来先服务，只不过是基于抢占策略，每一个进程执行完一个周期之后便会产生中断，放到服务队列的队尾
+
+最短进程优先：
+非抢占性，执行下一个预计处理时间最短的进程，不能保证一些紧迫性作业及时执行
+
+最短剩余时间优先：
+在最短进程优先的基础上增加了抢占机制，每一次只选择预期剩余时间最短的进程，当新进来的进程预期时间比当前正在执行的进程时间短的时候，则中断当
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-24 17:54" pubdate>
+              2022-02-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OS/">OS</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASession-Cookie/" target="_self">
+          计算机网络学习（二）：Session,Cookie和Token
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASession-Cookie/" target="_self">
+          
+          
+            
+          
+          session用户打开某一个web应用时，便会产生一次session，这个session会发给服务器，服务器会将session将用户信息临时存起来，用户离开网站后就会被销毁，这样相对于cookie更安全，但时如果服务器做了负载均衡，下一个操作请求到了其他的服务器上，session就会丢失
+cookie
+工作过程
+访问一个支持cookie的网站的时候，用户会将个人信息提交给服务器，客户端回传，将个人
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-24 17:24" pubdate>
+              2022-02-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Cookie/">Cookie</a>
+            
+              <a href="/tags/Token/">Token</a>
+            
+              <a href="/tags/Session/">Session</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/24/OSI%E4%B8%8ETCPIP/" target="_self">
+          计算机网络学习（一）：OSI与TCPIP
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/24/OSI%E4%B8%8ETCPIP/" target="_self">
+          
+          
+            
+          
+          OSI七层模型与TCP/IP模型
+    
+        OSI七层模型
+        TCP/IP概念层模型
+        功能  
+        TCP/IP协议簇
+    
+    
+        应用层
+        应用层
+        文件传输、电子邮件、虚拟终端
+        TFTP、HTT、FTP、DNS、Telnet
+    
+    
+        表示层
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-24 14:01" pubdate>
+              2022-02-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/OSI/">OSI</a>
+            
+              <a href="/tags/TCP-IP/">TCP/IP</a>
+            
+              <a href="/tags/%E4%B8%89%E6%AC%A1%E6%8F%A1%E6%89%8B/">三次握手</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%90%AF%E5%8A%A8/" target="_self">
+          操作系统学习（一）：启动
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%90%AF%E5%8A%A8/" target="_self">
+          
+          
+            
+          
+          0、打开电源 CPU初始化（BIOS引导)
+加点之后寄存器开始做一些初始化的工作，将CS=0xFFFF，IP=0X0000，于是CPU转去执行0XFFFF0处的指令，这里是一个指向BIOS程序的入口的转跳指令。
+
+1、BIOS启动：
+Pown On：校验CMOS（CMOS指保存计算机基本启动信息（如日期、时间、启动设置等）的芯片。CMOS是主板上的一块可读写的并行或串行FLASH芯片，是用来保存B
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-18 16:24" pubdate>
+              2022-02-18
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a>
+            
+              <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">操作系统</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/" target="_self">
           Go特性学习(一)：module
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/" target="_self">
+        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/" target="_self">
           
           
             
@@ -243,13 +488,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/" target="_self">
+        <a href="/2022/02/10/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/" target="_self">
           开发环境（二）：Go编译插件：protobuf&amp;&amp;grpc
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/" target="_self">
+        <a href="/2022/02/10/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9Aprotobuf/" target="_self">
           
           
             
@@ -301,13 +546,13 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/" target="_self">
+        <a href="/2022/02/10/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/" target="_self">
           开发环境（一）：Go
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/02/10/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/" target="_self">
+        <a href="/2022/02/10/%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9AGo/" target="_self">
           
           
             
@@ -430,13 +675,13 @@ exit 退出当前进程
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/02/04/Go%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3/" target="_self">
+        <a href="/2022/02/04/%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/Go%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3/" target="_self">
           Go语法基础（五）：方法与接口
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/02/04/Go%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3/" target="_self">
+        <a href="/2022/02/04/%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/Go%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95%EF%BC%88%E4%BA%94%EF%BC%89%EF%BC%9A%E6%96%B9%E6%B3%95%E4%B8%8E%E6%8E%A5%E5%8F%A3/" target="_self">
           
           
             
@@ -500,13 +745,13 @@ exit 退出当前进程
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2022/02/04/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
+        <a href="/2022/02/04/%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
           Go语法基础（四）：更多特性
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2022/02/04/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
+        <a href="/2022/02/04/%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
           
           
             
@@ -554,219 +799,13 @@ strings.Fields(&quot;go\nis\tvery \n fun&quot
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/02/04/G%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
-          Go语法基础（三）：指针,结构体,切片和映射
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/02/04/G%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
-          
-          
-            
-          
-          1.指针
-其零值为 nil
 
 
-&amp;操作符会生成一个指向其操作数的指针。
-12345678//定义type Vertex struct &#123;	X int	Y int&#125;//访问v := Vertex&#123;1, 2&#125;v.X = 
-***** 操作符表示指针指向的底层值。这也就是通常所说的间接引用或重定向。
-12345678//定义type Vertex stru
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-04 21:37" pubdate>
-              2022-02-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Go%E7%B3%BB%E5%88%97/">Go系列</a>
-            
-              <a href="/categories/Go%E7%B3%BB%E5%88%97/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">Go语法基础</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Go/">Go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/02/04/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
-          Go语法基础（二）：控制流
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/02/04/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
-          
-          
-            
-          
-          1.for循环123456789for  i := 0; i &lt; 10; i++  &#123;	//循环体&#125;//也可以for i &lt; 10 &#123;	//循环体&#125;//这个时候就和while一样
-
-2.if1234if v := plus(x,y); v &lt; M &#123;		return v	&#125;	return M
-
-3.switch
-Go 只
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-04 21:33" pubdate>
-              2022-02-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Go%E7%B3%BB%E5%88%97/">Go系列</a>
-            
-              <a href="/categories/Go%E7%B3%BB%E5%88%97/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">Go语法基础</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Go/">Go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/02/04/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
-          Go语法基础（一）：函数，变量
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/02/04/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
-          
-          
-            
-          
-          1.函数定义以及空白符：12345678910func plusAndMin(x int, y int) (int,int) &#123;	return x+y,x-y  &#125;//也可以func plusAndMin(x int, y int) (plus,min int) &#123;	plus = x+y    min = x-y    return   &#125;x,y=plusA
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-04 21:31" pubdate>
-              2022-02-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Go%E7%B3%BB%E5%88%97/">Go系列</a>
-            
-              <a href="/categories/Go%E7%B3%BB%E5%88%97/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">Go语法基础</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Go/">Go</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2022/02/03/Hello-World/" target="_self">
-          Hello-World
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2022/02/03/Hello-World/" target="_self">
-          
-          
-            
-          
-          大学一直以来想好好维护一个自己的博客，在有时间去瞎搞的时候还没有意识到这个问题，等意识到了，由于各种事情的打扰，一直以来没能把这件事再给拎起来。如今我已经大四了，再拾起来很高兴自己还抱有热情，耐心，完成之前没能完成的事情。今天买了几个月的服务器，一口气把博客和远程调试的环境搭建好了，后面几天会接着学习Go与微服务，不再徘徊过去，去享受身边此时此刻的一分一秒。
-
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2022-02-03 09:31" pubdate>
-              2022-02-03
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/Misc/">Misc</a>
-            
-          </div>
-        
-        
-      </div>
-    </article>
-  </div>
-
-
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+    </span>
+  </nav>
 
 
 

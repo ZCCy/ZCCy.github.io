@@ -1,0 +1,612 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="进程调度算法：先来先服务：时间片轮转算法：
+结合了先来先服务，只不过是基于抢占策略，每一个进程执行完一个周期之后便会产生中断，放到服务队列的队尾
+
+最短进程优先：
+非抢占性，执行下一个预计处理时间最短的进程，不能保证一些紧迫性作业及时执行
+
+最短剩余时间优先：
+在最短进程优先的基础上增加了抢占机制，每一次只选择预期剩余时间最短的进程，当新进来的进程预期时间比当前正在执行的进程时间短的时候，则中断当">
+  <meta name="author" content="ZCCy">
+  <meta name="keywords" content="">
+  <meta name="description" content="进程调度算法：先来先服务：时间片轮转算法： 结合了先来先服务，只不过是基于抢占策略，每一个进程执行完一个周期之后便会产生中断，放到服务队列的队尾  最短进程优先： 非抢占性，执行下一个预计处理时间最短的进程，不能保证一些紧迫性作业及时执行  最短剩余时间优先： 在最短进程优先的基础上增加了抢占机制，每一次只选择预期剩余时间最短的进程，当新进来的进程预期时间比当前正在执行的进程时间短的时候，则中断当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统学习（二）：进程调度">
+<meta property="og:url" content="http://example.com/2022/02/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6-1/index.html">
+<meta property="og:site_name" content="ZCCy">
+<meta property="og:description" content="进程调度算法：先来先服务：时间片轮转算法： 结合了先来先服务，只不过是基于抢占策略，每一个进程执行完一个周期之后便会产生中断，放到服务队列的队尾  最短进程优先： 非抢占性，执行下一个预计处理时间最短的进程，不能保证一些紧迫性作业及时执行  最短剩余时间优先： 在最短进程优先的基础上增加了抢占机制，每一次只选择预期剩余时间最短的进程，当新进来的进程预期时间比当前正在执行的进程时间短的时候，则中断当">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-24T09:54:00.000Z">
+<meta property="article:modified_time" content="2022-02-24T09:55:09.838Z">
+<meta property="article:author" content="ZCCy">
+<meta property="article:tag" content="OS">
+<meta name="twitter:card" content="summary_large_image">
+  
+  <title>操作系统学习（二）：进程调度 - ZCCy</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ZCCy&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/mount.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="操作系统学习（二）：进程调度">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-24 17:54" pubdate>
+        2022年2月24日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      529 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      5 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2 post-categories">
+      
+        
+
+
+
+
+
+
+<div class="category-list">
+  
+  
+  
+  
+  
+    
+    
+    
+    <div class="category row">
+      <a class="category-item 
+                 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-5a596b42154341fee9d0bdf28baa6524" role="tab" data-toggle="collapse" href="#collapse-5a596b42154341fee9d0bdf28baa6524"
+        aria-expanded="true"
+      >
+        计算机基础(4) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse show" id="collapse-5a596b42154341fee9d0bdf28baa6524" role="tabpanel" aria-labelledby="heading-5a596b42154341fee9d0bdf28baa6524">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+          
+  
+  
+  
+  
+    
+    
+    
+    <div class="category-sub row">
+      <a class="category-subitem 
+                 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-30d23ef4f49e85f37f54786ff984032c" role="tab" data-toggle="collapse" href="#collapse-30d23ef4f49e85f37f54786ff984032c"
+        aria-expanded="true"
+      >
+        操作系统(2) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse show" id="collapse-30d23ef4f49e85f37f54786ff984032c" role="tabpanel" aria-labelledby="heading-30d23ef4f49e85f37f54786ff984032c">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%90%AF%E5%8A%A8/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">操作系统学习（一）：启动</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6-1/"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">操作系统学习（二）：进程调度</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row">
+      <a class="category-subitem 
+                collapsed 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-f75627e742c5ba6fab3c2f3c2abf02a0" role="tab" data-toggle="collapse" href="#collapse-f75627e742c5ba6fab3c2f3c2abf02a0"
+        aria-expanded="false"
+      >
+        计算机网络(2) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse " id="collapse-f75627e742c5ba6fab3c2f3c2abf02a0" role="tabpanel" aria-labelledby="heading-f75627e742c5ba6fab3c2f3c2abf02a0">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/24/OSI%E4%B8%8ETCPIP/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机网络学习（一）：OSI与TCPIP</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASession-Cookie/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机网络学习（二）：Session,Cookie和Token</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+      
+    </div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none;">操作系统学习（二）：进程调度</h1>
+            
+            <div class="markdown-body">
+              <h2 id="进程调度算法："><a href="#进程调度算法：" class="headerlink" title="进程调度算法："></a>进程调度算法：</h2><h4 id="先来先服务："><a href="#先来先服务：" class="headerlink" title="先来先服务："></a>先来先服务：</h4><h4 id="时间片轮转算法："><a href="#时间片轮转算法：" class="headerlink" title="时间片轮转算法："></a>时间片轮转算法：</h4><ul>
+<li>结合了先来先服务，只不过是基于抢占策略，每一个进程执行完一个周期之后便会产生中断，放到服务队列的队尾</li>
+</ul>
+<h4 id="最短进程优先："><a href="#最短进程优先：" class="headerlink" title="最短进程优先："></a>最短进程优先：</h4><ul>
+<li>非抢占性，执行下一个预计处理时间最短的进程，不能保证一些紧迫性作业及时执行</li>
+</ul>
+<h4 id="最短剩余时间优先："><a href="#最短剩余时间优先：" class="headerlink" title="最短剩余时间优先："></a>最短剩余时间优先：</h4><ul>
+<li>在最短进程优先的基础上增加了抢占机制，每一次只选择预期剩余时间最短的进程，当新进来的进程预期时间比当前正在执行的进程时间短的时候，则中断当前进程。这样可能会存在长进程饥饿的风险，并且需要估计处理时间</li>
+</ul>
+<h4 id="最高相应比优先："><a href="#最高相应比优先：" class="headerlink" title="最高相应比优先："></a>最高相应比优先：</h4><ul>
+<li><code>R=(w+s)/s</code> w：等待时间、s：预计服务时间</li>
+<li>也需要预估进程处理时间，当每一次当前进程结束或者进程发生阻塞时，选择R值最大的（简单理解就是等的时间相比于运行时间越长的）</li>
+</ul>
+<h4 id="反馈法："><a href="#反馈法：" class="headerlink" title="反馈法："></a>反馈法：</h4><ul>
+<li>在不预估进程处理时间的情况</li>
+<li>有多个先来先服务队列组成（除了最低级的队列），这些队列在系统中被分级，结合时间片轮转算法，当一个进程第一次进入系统第一次被抢占返回waiting状态时，会被放置在下一个低级优先队列中，如果在下一个时间片还没有运行完，则被放置在再下一级的队列中。最低级的队列按照轮转方式进行</li>
+</ul>
+<h4 id="多级反馈队列调度算法："><a href="#多级反馈队列调度算法：" class="headerlink" title="多级反馈队列调度算法："></a>多级反馈队列调度算法：</h4><ul>
+<li>同反馈法相同，存在多个不同优先级队列</li>
+<li>不同的是，对于优先级越高的队列，为每个进程规定的执行时间片就小</li>
+</ul>
+
+            </div>
+            <hr />
+            <div>
+              <div class="post-metas mb-3">
+                
+                <div class="post-meta mr-3">
+                  <i class="iconfont icon-category"></i>
+                  
+                  <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"
+                    >计算机基础</a
+                  >
+                  
+                  <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"
+                    >操作系统</a
+                  >
+                  
+                </div>
+                 
+                <div class="post-meta">
+                  <i class="iconfont icon-tags"></i>
+                  
+                  <a class="hover-with-bg" href="/tags/OS/"
+                    >OS</a
+                  >
+                  
+                </div>
+                
+              </div>
+              
+              <p class="note note-warning">
+                 本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！ 
+              </p>
+               
+              <div class="post-prevnext">
+                <article class="post-prev col-6">
+                   
+                </article>
+                <article class="post-next col-6">
+                   
+                  <a href="/2022/02/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASession-Cookie/">
+                    <span class="hidden-mobile">计算机网络学习（二）：Session,Cookie和Token</span>
+                    <span class="visible-mobile">下一篇</span>
+                    <i class="iconfont icon-arrowright"></i>
+                  </a>
+                  
+                </article>
+              </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+    <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+      <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+    </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

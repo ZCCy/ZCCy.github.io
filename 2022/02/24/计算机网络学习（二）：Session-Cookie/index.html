@@ -1,0 +1,666 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="session用户打开某一个web应用时，便会产生一次session，这个session会发给服务器，服务器会将session将用户信息临时存起来，用户离开网站后就会被销毁，这样相对于cookie更安全，但时如果服务器做了负载均衡，下一个操作请求到了其他的服务器上，session就会丢失
+cookie
+工作过程
+访问一个支持cookie的网站的时候，用户会将个人信息提交给服务器，客户端回传，将个人">
+  <meta name="author" content="ZCCy">
+  <meta name="keywords" content="">
+  <meta name="description" content="session用户打开某一个web应用时，便会产生一次session，这个session会发给服务器，服务器会将session将用户信息临时存起来，用户离开网站后就会被销毁，这样相对于cookie更安全，但时如果服务器做了负载均衡，下一个操作请求到了其他的服务器上，session就会丢失 cookie 工作过程 访问一个支持cookie的网站的时候，用户会将个人信息提交给服务器，客户端回传，将个人">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络学习（二）：Session,Cookie和Token">
+<meta property="og:url" content="http://example.com/2022/02/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASession-Cookie/index.html">
+<meta property="og:site_name" content="ZCCy">
+<meta property="og:description" content="session用户打开某一个web应用时，便会产生一次session，这个session会发给服务器，服务器会将session将用户信息临时存起来，用户离开网站后就会被销毁，这样相对于cookie更安全，但时如果服务器做了负载均衡，下一个操作请求到了其他的服务器上，session就会丢失 cookie 工作过程 访问一个支持cookie的网站的时候，用户会将个人信息提交给服务器，客户端回传，将个人">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ZCCy/clouding@master/data/img/session_id.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/ZCCy/clouding@master/data/img/token.png">
+<meta property="article:published_time" content="2022-02-24T09:24:00.000Z">
+<meta property="article:modified_time" content="2022-02-24T09:53:31.142Z">
+<meta property="article:author" content="ZCCy">
+<meta property="article:tag" content="Cookie">
+<meta property="article:tag" content="Token">
+<meta property="article:tag" content="Session">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/ZCCy/clouding@master/data/img/session_id.png">
+  
+  <title>计算机网络学习（二）：Session,Cookie和Token - ZCCy</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4/github-markdown.min.css" />
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hint.css@2/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.css" />
+  
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.12","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.1"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>ZCCy&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/mount.webp') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="计算机网络学习（二）：Session,Cookie和Token">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-24 17:24" pubdate>
+        2022年2月24日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      24 分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2 post-categories">
+      
+        
+
+
+
+
+
+
+<div class="category-list">
+  
+  
+  
+  
+  
+    
+    
+    
+    <div class="category row">
+      <a class="category-item 
+                 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-5a596b42154341fee9d0bdf28baa6524" role="tab" data-toggle="collapse" href="#collapse-5a596b42154341fee9d0bdf28baa6524"
+        aria-expanded="true"
+      >
+        计算机基础(4) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse show" id="collapse-5a596b42154341fee9d0bdf28baa6524" role="tabpanel" aria-labelledby="heading-5a596b42154341fee9d0bdf28baa6524">
+        
+        
+          
+          
+  <div class="category-post-list">
+    
+    
+  </div>
+
+          
+          
+  
+  
+  
+  
+    
+    
+    
+    <div class="category-sub row">
+      <a class="category-subitem 
+                collapsed 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-30d23ef4f49e85f37f54786ff984032c" role="tab" data-toggle="collapse" href="#collapse-30d23ef4f49e85f37f54786ff984032c"
+        aria-expanded="false"
+      >
+        操作系统(2) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse " id="collapse-30d23ef4f49e85f37f54786ff984032c" role="tabpanel" aria-labelledby="heading-30d23ef4f49e85f37f54786ff984032c">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/18/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89%EF%BC%9A%E5%90%AF%E5%8A%A8/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">操作系统学习（一）：启动</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6-1/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">操作系统学习（二）：进程调度</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    
+    <div class="category-sub row">
+      <a class="category-subitem 
+                 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-f75627e742c5ba6fab3c2f3c2abf02a0" role="tab" data-toggle="collapse" href="#collapse-f75627e742c5ba6fab3c2f3c2abf02a0"
+        aria-expanded="true"
+      >
+        计算机网络(2) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse show" id="collapse-f75627e742c5ba6fab3c2f3c2abf02a0" role="tabpanel" aria-labelledby="heading-f75627e742c5ba6fab3c2f3c2abf02a0">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/24/OSI%E4%B8%8ETCPIP/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">计算机网络学习（一）：OSI与TCPIP</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9ASession-Cookie/"
+           class="list-group-item list-group-item-action
+           active">
+          <span class="category-post">计算机网络学习（二）：Session,Cookie和Token</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+        
+      </div>
+    </div>
+  
+</div>
+
+      
+    </div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none;">计算机网络学习（二）：Session,Cookie和Token</h1>
+            
+            <div class="markdown-body">
+              <h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><p>用户打开某一个web应用时，便会产生一次session，这个session会发给服务器，服务器会将session将用户信息临时存起来，用户离开网站后就会被销毁，这样相对于cookie更安全，但时如果服务器做了负载均衡，下一个操作请求到了其他的服务器上，session就会丢失</p>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><ul>
+<li><p>工作过程</p>
+<p>访问一个支持cookie的网站的时候，用户会将个人信息提交给服务器，客户端回传，将个人信息存放在HTTP的响应头，客户端收到之后存放在一个位置。下一次在访问，就可以直接将cookie存放在HTTP请求头，客户端收到分析cookie客户端的信息，生成客户端相应的内容。</p>
+</li>
+<li><p>存储位置：</p>
+<p><code>[系统盘]:\Documents and Settings[用户名]\Cookies</code></p>
+</li>
+<li><p>cookie的组成</p>
+<p>名称（key）、值（value），有效域（domain），路径（域的路径，一般是全局“\”）、失效时间（正数：在cookie》maxAge之后失效，负数：一次性，关闭即失效）、安全标志（指定之后只有SSL连接时才会发送到https）</p>
+</li>
+<li><p>http与cookie</p>
+<p>有两个http头部是专门负责设置以及发送cookie的,它们分别是Set-Cookie以及Cookie。</p>
+<p>当服务器返回给客户端一个http响应信息时，其中如果包含Set-Cookie这个头部时，意思就是指示客户端建立一个cookie，并且在后续的http请求中自动发送这个cookie到服务器端，直到这个cookie过期。</p>
+<p>如果cookie的生存时间是整个会话期间的话，那么浏览器会将cookie保存在内存中，浏览器关闭时就会自动清除这个cookie。另外一种情况就是保存在客户端的硬盘中，浏览器关闭的话，该cookie也不会被清除，下次打开浏览器访问对应网站时，这个cookie就会自动再次发送到服务器端。</p>
+</li>
+<li><p>不可跨域：</p>
+<p>浏览器判断一个网站是否能操作另一个网站Cookie的依据是域名。Google与Baidu的域名不一样，因此Google不能操作Baidu的Cookie。<a target="_blank" rel="noopener" href="http://www.google.com之后会发现访问images.google.com时登录信息仍然有效,而普通的cookie是做不到的.这是因为google做了特殊处理./">www.google.com之后会发现访问images.google.com时登录信息仍然有效，而普通的Cookie是做不到的。这是因为Google做了特殊处理。</a></p>
+</li>
+<li><p>cookie修改</p>
+<p>cookie不能修改删除，只能设置除value、maxAge之外的所有属性都相同的cookie才能视为覆盖</p>
+</li>
+</ul>
+<h3 id="cookie和session区别："><a href="#cookie和session区别：" class="headerlink" title="cookie和session区别："></a>cookie和session区别：</h3><ul>
+<li><p>存储位置</p>
+<p>cookie：存储在本地，因此不安全，容易被人分析放在本地的cookie</p>
+<p>session：存储在服务端，会相对安全一些，但占用服务器性能</p>
+</li>
+<li><p>将登陆信息等重要信息存放为SESSION</p>
+</li>
+<li><p>其他信息如果需要保留，可以放在COOKIE中</p>
+</li>
+</ul>
+<h3 id="Cookie-Based-Auth-和-Token-Based-Auth"><a href="#Cookie-Based-Auth-和-Token-Based-Auth" class="headerlink" title="Cookie-Based Auth 和 Token-Based Auth"></a>Cookie-Based Auth 和 Token-Based Auth</h3><h4 id="Cookie-Auth"><a href="#Cookie-Auth" class="headerlink" title="Cookie Auth"></a>Cookie Auth</h4><p>  <img src="https://cdn.jsdelivr.net/gh/ZCCy/clouding@master/data/img/session_id.png" srcset="/img/loading.gif" lazyload></p>
+<h4 id="Token-Auth"><a href="#Token-Auth" class="headerlink" title="Token Auth"></a>Token Auth</h4><p><img src="https://cdn.jsdelivr.net/gh/ZCCy/clouding@master/data/img/token.png" srcset="/img/loading.gif" lazyload></p>
+<h5 id="JWT组成："><a href="#JWT组成：" class="headerlink" title="JWT组成："></a>JWT组成：</h5><ul>
+<li><p><strong>载荷（Payload）</strong></p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123; <span class="hljs-attr">&quot;iss&quot;</span>: <span class="hljs-string">&quot;Online JWT Builder&quot;</span>,         <span class="hljs-comment">// 该JWT的签发者，是否使用是可选的；</span><br>  <span class="hljs-attr">&quot;iat&quot;</span>: <span class="hljs-number">1416797419</span>,                   <span class="hljs-comment">// 在什么时候签发的(UNIX时间)，是否使用是可选的；</span><br>   <span class="hljs-attr">&quot;exp&quot;</span>: <span class="hljs-number">1448333419</span>,                   <span class="hljs-comment">//什么时候过期，这里是一个Unix时间戳，是否使用是可选的；</span><br>  <span class="hljs-attr">&quot;aud&quot;</span>: <span class="hljs-string">&quot;www.example.com&quot;</span>,            <span class="hljs-comment">// 接收该JWT的一方，是否使用是可选的；</span><br>  <span class="hljs-attr">&quot;sub&quot;</span>: <span class="hljs-string">&quot;jrocket@example.com&quot;</span>,        <span class="hljs-comment">//该JWT所面向的用户，是否使用是可选的；</span><br> <span class="hljs-attr">&quot;GivenName&quot;</span>: <span class="hljs-string">&quot;Johnny&quot;</span>, <br> <span class="hljs-attr">&quot;Surname&quot;</span>: <span class="hljs-string">&quot;Rocket&quot;</span>, <br>  <span class="hljs-attr">&quot;Email&quot;</span>: <span class="hljs-string">&quot;jrocket@example.com&quot;</span>, <br>  <span class="hljs-attr">&quot;Role&quot;</span>: [ <span class="hljs-string">&quot;Manager&quot;</span>, <span class="hljs-string">&quot;Project Administrator&quot;</span> ] <br> &#125;<br></code></pre></td></tr></table></figure>
+
+<p>将上面的JSON对象进行[base64编码]可以得到下面的字符串。这个字符串我们将它称作JWT的Payload（载荷）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs base64">eyJpc3MiOiJKb2huIFd1IEpXVCIsImlhdCI6MTQ0MTU5MzUwMiwiZXhwIjoxNDQxNTk0NzIyLCJhdWQiOiJ3d3cuZXhhbXBsZS5jb20iLCJzdWIiOiJqcm9ja2V0QGV4YW1wbGUuY29tIiwiZnJvbV91c2VyIjoiQiIsInRhcmdldF91c2VyIjoiQSJ9<br></code></pre></td></tr></table></figure></li>
+<li><p><strong>头部（Header）</strong></p>
+<p>JWT还需要一个头部，头部用于描述关于该JWT的最基本的信息，例如其类型以及签名所用的算法等。这也可以被表示成一个JSON对象。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs json">&#123;<br><span class="hljs-attr">&quot;typ&quot;</span>: <span class="hljs-string">&quot;JWT&quot;</span>,    <br><span class="hljs-attr">&quot;alg&quot;</span>: <span class="hljs-string">&quot;HS256&quot;</span>                       <span class="hljs-comment">//指明算法HS256</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当然头部也要进行BASE64编码，编码后的字符串如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs base64">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9<br></code></pre></td></tr></table></figure></li>
+<li><p><strong>签名（Signature）</strong></p>
+<p>将上面的两个编码后的字符串都用句号.连接在一起（头部在前），就形成了:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcm9tX3VzZXIiOiJCIiwidGFyZ2V0X3VzZXIiOiJBIn0<br></code></pre></td></tr></table></figure>
+
+<p>最后，我们将上面拼接完的字符串用HS256算法进行加密。在加密的时候，我们还需要提供一个密钥（secret）。如果我们用mystar作为密钥的话，那么就可以得到我们加密后的内容:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined">rSWamyAYwuHCo7IFAgd1oRpSP7nzL7BF5t7ItqpKViM<br></code></pre></td></tr></table></figure>
+
+<p>最后将这一部分签名也拼接在被签名的字符串后面，我们就得到了完整的JWT:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs undefined">eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcm9tX3VzZXIiOiJCIiwidGFyZ2V0X3VzZXIiOiJBIn0.rSWamyAYwuHCo7IFAgd1oRpSP7nzL7BF5t7ItqpKViM<br></code></pre></td></tr></table></figure>
+
+<p>在我们的请求URL中会带上这串JWT字符串：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">https</span>://your.awesome-app.com/make-friend/?jwt=eyJ<span class="hljs-number">0</span>eXAiOiJKV<span class="hljs-number">1</span>QiLCJhbGciOiJIUzI<span class="hljs-number">1</span>NiJ<span class="hljs-number">9</span>.eyJmcm<span class="hljs-number">9</span>tX<span class="hljs-number">3</span>VzZXIiOiJCIiwidGFyZ<span class="hljs-number">2</span>V<span class="hljs-number">0</span>X<span class="hljs-number">3</span>VzZXIiOiJBIn<span class="hljs-number">0</span>.rSWamyAYwuHCo<span class="hljs-number">7</span>IFAgd<span class="hljs-number">1</span>oRpSP<span class="hljs-number">7</span>nzL<span class="hljs-number">7</span>BF<span class="hljs-number">5</span>t<span class="hljs-number">7</span>ItqpKViM<br></code></pre></td></tr></table></figure></li>
+</ul>
+
+            </div>
+            <hr />
+            <div>
+              <div class="post-metas mb-3">
+                
+                <div class="post-meta mr-3">
+                  <i class="iconfont icon-category"></i>
+                  
+                  <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/"
+                    >计算机基础</a
+                  >
+                  
+                  <a class="hover-with-bg" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"
+                    >计算机网络</a
+                  >
+                  
+                </div>
+                 
+                <div class="post-meta">
+                  <i class="iconfont icon-tags"></i>
+                  
+                  <a class="hover-with-bg" href="/tags/Cookie/"
+                    >Cookie</a
+                  >
+                  
+                  <a class="hover-with-bg" href="/tags/Token/"
+                    >Token</a
+                  >
+                  
+                  <a class="hover-with-bg" href="/tags/Session/"
+                    >Session</a
+                  >
+                  
+                </div>
+                
+              </div>
+              
+              <p class="note note-warning">
+                 本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！ 
+              </p>
+               
+              <div class="post-prevnext">
+                <article class="post-prev col-6">
+                   
+                  <a href="/2022/02/24/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E8%BF%9B%E7%A8%8B%E8%B0%83%E5%BA%A6-1/">
+                    <i class="iconfont icon-arrowleft"></i>
+                    <span class="hidden-mobile">操作系统学习（二）：进程调度</span>
+                    <span class="visible-mobile">上一篇</span>
+                  </a>
+                  
+                </article>
+                <article class="post-next col-6">
+                   
+                  <a href="/2022/02/24/OSI%E4%B8%8ETCPIP/">
+                    <span class="hidden-mobile">计算机网络学习（一）：OSI与TCPIP</span>
+                    <span class="visible-mobile">下一篇</span>
+                    <i class="iconfont icon-arrowright"></i>
+                  </a>
+                  
+                </article>
+              </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+    <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+      <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+    </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  
+    <script  src="https://cdn.jsdelivr.net/npm/tocbot@4/dist/tocbot.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3/dist/jquery.fancybox.min.js" ></script>
+  
+  
+    <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4/anchor.min.js" ></script>
+  
+  
+    <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js" ></script>
+  
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+        typing(title);
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

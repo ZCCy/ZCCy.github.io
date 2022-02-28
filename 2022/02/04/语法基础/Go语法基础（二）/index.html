@@ -258,7 +258,7 @@ Go 只">
         id="heading-1ba716350aed4c1bebbc4f5f95be0c55" role="tab" data-toggle="collapse" href="#collapse-1ba716350aed4c1bebbc4f5f95be0c55"
         aria-expanded="true"
       >
-        Go系列(7) 
+        Go系列(8) 
         <i class="iconfont icon-arrowright"></i>
       </a>
        
@@ -277,42 +277,6 @@ Go 只">
   
   
   
-  
-    
-    
-    
-    <div class="category-sub row">
-      <a class="category-subitem 
-                collapsed 
-                list-group-item category-item-action col-10 col-md-11 col-xm-11"
-        id="heading-300f6e9937c889c70ab349f218ab11bb" role="tab" data-toggle="collapse" href="#collapse-300f6e9937c889c70ab349f218ab11bb"
-        aria-expanded="false"
-      >
-        Go特性学习(1) 
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-       
-      <div class="category-collapse collapse " id="collapse-300f6e9937c889c70ab349f218ab11bb" role="tabpanel" aria-labelledby="heading-300f6e9937c889c70ab349f218ab11bb">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Go特性学习(一)：module</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
   
     
     
@@ -395,6 +359,51 @@ Go 只">
       </div>
     </div>
   
+    
+    
+    
+    <div class="category-sub row">
+      <a class="category-subitem 
+                collapsed 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-2d743bd8fecbcaaf635a5c4386e37a5c" role="tab" data-toggle="collapse" href="#collapse-2d743bd8fecbcaaf635a5c4386e37a5c"
+        aria-expanded="false"
+      >
+        Go进阶学习(2) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse " id="collapse-2d743bd8fecbcaaf635a5c4386e37a5c" role="tabpanel" aria-labelledby="heading-2d743bd8fecbcaaf635a5c4386e37a5c">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Go进阶学习(一)：module</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/28/Go%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Go进阶学习（二）：内存管理</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
         
       </div>
     </div>
@@ -416,19 +425,21 @@ Go 只">
 <h3 id="2-if"><a href="#2-if" class="headerlink" title="2.if"></a>2.if</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">if</span> v := plus(x,y); v &lt; M &#123;<br>		<span class="hljs-keyword">return</span> v<br>	&#125;<br>	<span class="hljs-keyword">return</span> M<br></code></pre></td></tr></table></figure>
 
 <h3 id="3-switch"><a href="#3-switch" class="headerlink" title="3.switch"></a>3.switch</h3><ul>
-<li>Go 只运行选定的 case，而非之后所有的 case。如果需要运行之后所有则 以 <code>fallthrough</code> 语句结束</li>
-</ul>
-<ul>
+<li><p>Go 只运行选定的 case，而非之后所有的 case。如果需要运行之后所有则 以 <code>fallthrough</code> 语句结束</p>
+</li>
 <li><p>case 无需为常量，且取值不必为整数。</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">switch</span> a := m &#123;<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;1&quot;</span>:<br>		<span class="hljs-comment">//TODO 1</span><br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;2&quot;</span>:<br>		<span class="hljs-comment">//TODO 2</span><br>	<span class="hljs-keyword">default</span>:<br>		<span class="hljs-comment">//TODO else</span><br>	&#125;<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">switch</span> a := m &#123;<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;1&quot;</span>:<br>		<span class="hljs-comment">//TODO 1</span><br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;2&quot;</span>:<br>		<span class="hljs-comment">//TODO 2</span><br>	<span class="hljs-keyword">default</span>:<br>		<span class="hljs-comment">//TODO else</span><br>	&#125;<br></code></pre></td></tr></table></figure>
+
+
+</li>
 <li><p>无条件的switch与一长串 if-then-else等价</p>
 </li>
 </ul>
 <h3 id="4-defer"><a href="#4-defer" class="headerlink" title="4.defer"></a>4.defer</h3><ul>
-<li>defer 语句会将函数推迟到外层函数返回之后执行。推迟调用的函数其参数会立即求值，但直到外层函数返回前该函数都不会被调用。</li>
-</ul>
-<ul>
-<li><strong>defer本质是将函数先入栈，等到内层函数执行完之后，再将defer栈中的函数出栈</strong>。当多个函数被defer时，其实是多个函数同时入defer栈</li>
+<li><p>defer 语句会将函数推迟到外层函数返回之后执行。推迟调用的函数其参数会立即求值，但直到外层函数返回前该函数都不会被调用。</p>
+</li>
+<li><p><strong>defer本质是将函数先入栈，等到内层函数执行完之后，再将defer栈中的函数出栈</strong>。当多个函数被defer时，其实是多个函数同时入defer栈</p>
+</li>
 </ul>
 <p>​    更多关于 defer 语句的信息，请阅读<a target="_blank" rel="noopener" href="http://blog.go-zh.org/defer-panic-and-recover">此博文</a>。</p>
 

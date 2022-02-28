@@ -261,7 +261,7 @@ strings.Fields(&amp;quot;go\nis\tvery \n fun&amp;quot">
         id="heading-1ba716350aed4c1bebbc4f5f95be0c55" role="tab" data-toggle="collapse" href="#collapse-1ba716350aed4c1bebbc4f5f95be0c55"
         aria-expanded="true"
       >
-        Go系列(7) 
+        Go系列(8) 
         <i class="iconfont icon-arrowright"></i>
       </a>
        
@@ -280,42 +280,6 @@ strings.Fields(&amp;quot;go\nis\tvery \n fun&amp;quot">
   
   
   
-  
-    
-    
-    
-    <div class="category-sub row">
-      <a class="category-subitem 
-                collapsed 
-                list-group-item category-item-action col-10 col-md-11 col-xm-11"
-        id="heading-300f6e9937c889c70ab349f218ab11bb" role="tab" data-toggle="collapse" href="#collapse-300f6e9937c889c70ab349f218ab11bb"
-        aria-expanded="false"
-      >
-        Go特性学习(1) 
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-       
-      <div class="category-collapse collapse " id="collapse-300f6e9937c889c70ab349f218ab11bb" role="tabpanel" aria-labelledby="heading-300f6e9937c889c70ab349f218ab11bb">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Go特性学习(一)：module</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
   
     
     
@@ -398,6 +362,51 @@ strings.Fields(&amp;quot;go\nis\tvery \n fun&amp;quot">
       </div>
     </div>
   
+    
+    
+    
+    <div class="category-sub row">
+      <a class="category-subitem 
+                collapsed 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-2d743bd8fecbcaaf635a5c4386e37a5c" role="tab" data-toggle="collapse" href="#collapse-2d743bd8fecbcaaf635a5c4386e37a5c"
+        aria-expanded="false"
+      >
+        Go进阶学习(2) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse " id="collapse-2d743bd8fecbcaaf635a5c4386e37a5c" role="tabpanel" aria-labelledby="heading-2d743bd8fecbcaaf635a5c4386e37a5c">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Go进阶学习(一)：module</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/28/Go%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Go进阶学习（二）：内存管理</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
         
       </div>
     </div>
@@ -430,12 +439,14 @@ strings.Fields(&amp;quot;go\nis\tvery \n fun&amp;quot">
 <li><p>函数也是值。它们可以像其它值一样传递。函数值可以用作函数的参数或返回值。</p>
 </li>
 <li><p>函数内不能声明函数,只能创建一个匿名函数</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">say</span><span class="hljs-params">()</span></span> &#123;  <span class="hljs-comment">// 这里语法错误</span><br>        fmt.Println(<span class="hljs-string">&quot;Hello&quot;</span>)<br>    &#125;<br>&#125;<br><span class="hljs-comment">//样子是正确的,这里是函数的变量声明</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    say := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        fmt.Println(<span class="hljs-string">&quot;Hello&quot;</span>)<br>    &#125;<br>&#125;<br><span class="hljs-comment">//函数内实现递归</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> say <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(x *<span class="hljs-keyword">int</span>)</span></span><br>    say = <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(x *<span class="hljs-keyword">int</span>)</span></span> &#123;<br>        <span class="hljs-keyword">if</span> *x == <span class="hljs-number">0</span> &#123;<br>            say(x)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">say</span><span class="hljs-params">()</span></span> &#123;  <span class="hljs-comment">// 这里语法错误</span><br>        fmt.Println(<span class="hljs-string">&quot;Hello&quot;</span>)<br>    &#125;<br>&#125;<br><span class="hljs-comment">//样子是正确的,这里是函数的变量声明</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    say := <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">()</span></span> &#123;<br>        fmt.Println(<span class="hljs-string">&quot;Hello&quot;</span>)<br>    &#125;<br>&#125;<br><span class="hljs-comment">//函数内实现递归</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>    <span class="hljs-keyword">var</span> say <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(x *<span class="hljs-keyword">int</span>)</span></span><br>    say = <span class="hljs-function"><span class="hljs-keyword">func</span><span class="hljs-params">(x *<span class="hljs-keyword">int</span>)</span></span> &#123;<br>        <span class="hljs-keyword">if</span> *x == <span class="hljs-number">0</span> &#123;<br>            say(x)<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+</li>
 <li><p>如果返回值只有一个参数，并且没有名字，那么不需要加圆括号</p>
 </li>
 </ul>
 <h3 id="3-函数的闭包"><a href="#3-函数的闭包" class="headerlink" title="3.函数的闭包"></a>3.函数的闭包</h3><ul>
-<li>```go<br>//函数片段<br>func add(base int) func(int) int {<pre><code>fmt.Printf(&quot;%p\n&quot;, &amp;base)  //打印变量地址，可以看出来 内部函数时对外部传入参数的引用
+<li><p>&#96;&#96;&#96;go<br>&#x2F;&#x2F;函数片段<br>func add(base int) func(int) int {</p>
+<pre><code>fmt.Printf(&quot;%p\n&quot;, &amp;base)  //打印变量地址，可以看出来 内部函数时对外部传入参数的引用
 
 f := func(i int) int &#123;
     fmt.Printf(&quot;%p\n&quot;, &amp;base)
@@ -444,13 +455,8 @@ f := func(i int) int &#123;
 &#125;
 return f
 </code></pre>
-}<br>//由 main 函数作为程序入口点启动<br>func main() {<pre><code>t1 := add(10)
-fmt.Println(t1(1), t1(2))
-
-t2 := add(100)
-fmt.Println(t2(1), t2(2))
-</code></pre>
-}<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs swift"><br><span class="hljs-operator">-</span> 这里的`i`被称为获取变量<br><br>#### 练习<br><br><span class="hljs-operator">-</span> 用闭包实现斐波那契数列<br><br>  ```go<br>  package main<br>  <br>  <span class="hljs-keyword">import</span> &quot;fmt&quot;<br>  <br>  <span class="hljs-comment">// 返回一个“返回int的函数”</span><br>  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fibonacci</span>()</span> <span class="hljs-function"><span class="hljs-keyword">func</span>()</span> int &#123;<br>     i :<span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>     j :<span class="hljs-operator">=</span> <span class="hljs-number">1</span><br>     <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">func</span>()</span> int &#123;<br>        temp :<span class="hljs-operator">=</span> i<br>        i <span class="hljs-operator">=</span> j<br>        j <span class="hljs-operator">=</span> temp <span class="hljs-operator">+</span> j <span class="hljs-comment">//这里的i,j和上面的i,j共享同一个内存空间</span><br>        <span class="hljs-keyword">return</span> j<br>     &#125;<br>  &#125;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span>()</span> &#123;<br>     f :<span class="hljs-operator">=</span> fibonacci()<br>     <span class="hljs-keyword">for</span> i :<span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> <span class="hljs-number">10</span>; i<span class="hljs-operator">++</span> &#123;<br>        fmt.<span class="hljs-type">Println</span>(f())<br>     &#125;<br>  &#125;<br></code></pre></td></tr></table></figure></li>
+<p>}<br>&#x2F;&#x2F;由 main 函数作为程序入口点启动<br>func main() {<br>t1 :&#x3D; add(10)<br>fmt.Println(t1(1), t1(2))<br><br>t2 :&#x3D; add(100)<br>fmt.Println(t2(1), t2(2))<br>}</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs swift"><br><span class="hljs-operator">-</span> 这里的`i`被称为获取变量<br><br>#### 练习<br><br><span class="hljs-operator">-</span> 用闭包实现斐波那契数列<br><br>  ```go<br>  package main<br>  <br>  <span class="hljs-keyword">import</span> &quot;fmt&quot;<br>  <br>  <span class="hljs-comment">// 返回一个“返回int的函数”</span><br>  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">fibonacci</span>()</span> <span class="hljs-function"><span class="hljs-keyword">func</span>()</span> int &#123;<br>     i :<span class="hljs-operator">=</span> <span class="hljs-number">0</span><br>     j :<span class="hljs-operator">=</span> <span class="hljs-number">1</span><br>     <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">func</span>()</span> int &#123;<br>        temp :<span class="hljs-operator">=</span> i<br>        i <span class="hljs-operator">=</span> j<br>        j <span class="hljs-operator">=</span> temp <span class="hljs-operator">+</span> j <span class="hljs-comment">//这里的i,j和上面的i,j共享同一个内存空间</span><br>        <span class="hljs-keyword">return</span> j<br>     &#125;<br>  &#125;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span>()</span> &#123;<br>     f :<span class="hljs-operator">=</span> fibonacci()<br>     <span class="hljs-keyword">for</span> i :<span class="hljs-operator">=</span> <span class="hljs-number">0</span>; i <span class="hljs-operator">&lt;</span> <span class="hljs-number">10</span>; i<span class="hljs-operator">++</span> &#123;<br>        fmt.<span class="hljs-type">Println</span>(f())<br>     &#125;<br>  &#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="4-Printf"><a href="#4-Printf" class="headerlink" title="4.Printf"></a>4.Printf</h3><ol>
 <li><code>%v</code> 只输出所有的<strong>值</strong></li>

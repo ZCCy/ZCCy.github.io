@@ -196,7 +196,7 @@
   
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      572 字
+      577 字
     </span>
   
 
@@ -253,7 +253,7 @@
         id="heading-1ba716350aed4c1bebbc4f5f95be0c55" role="tab" data-toggle="collapse" href="#collapse-1ba716350aed4c1bebbc4f5f95be0c55"
         aria-expanded="true"
       >
-        Go系列(7) 
+        Go系列(8) 
         <i class="iconfont icon-arrowright"></i>
       </a>
        
@@ -272,42 +272,6 @@
   
   
   
-  
-    
-    
-    
-    <div class="category-sub row">
-      <a class="category-subitem 
-                collapsed 
-                list-group-item category-item-action col-10 col-md-11 col-xm-11"
-        id="heading-300f6e9937c889c70ab349f218ab11bb" role="tab" data-toggle="collapse" href="#collapse-300f6e9937c889c70ab349f218ab11bb"
-        aria-expanded="false"
-      >
-        Go特性学习(1) 
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-       
-      <div class="category-collapse collapse " id="collapse-300f6e9937c889c70ab349f218ab11bb" role="tabpanel" aria-labelledby="heading-300f6e9937c889c70ab349f218ab11bb">
-        
-        
-          
-  <div class="category-post-list">
-    
-    
-      
-      
-        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/"
-           class="list-group-item list-group-item-action
-           ">
-          <span class="category-post">Go特性学习(一)：module</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
   
     
     
@@ -390,6 +354,51 @@
       </div>
     </div>
   
+    
+    
+    
+    <div class="category-sub row">
+      <a class="category-subitem 
+                collapsed 
+                list-group-item category-item-action col-10 col-md-11 col-xm-11"
+        id="heading-2d743bd8fecbcaaf635a5c4386e37a5c" role="tab" data-toggle="collapse" href="#collapse-2d743bd8fecbcaaf635a5c4386e37a5c"
+        aria-expanded="false"
+      >
+        Go进阶学习(2) 
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+       
+      <div class="category-collapse collapse " id="collapse-2d743bd8fecbcaaf635a5c4386e37a5c" role="tabpanel" aria-labelledby="heading-2d743bd8fecbcaaf635a5c4386e37a5c">
+        
+        
+          
+  <div class="category-post-list">
+    
+    
+      
+      
+        <a href="/2022/02/10/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0/Go%E7%89%B9%E6%80%A7%E5%AD%A6%E4%B9%A0-%E4%B8%80-%EF%BC%9Ago-mod/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Go进阶学习(一)：module</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2022/02/28/Go%E8%BF%9B%E9%98%B6%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89%EF%BC%9A%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/"
+           class="list-group-item list-group-item-action
+           ">
+          <span class="category-post">Go进阶学习（二）：内存管理</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
         
       </div>
     </div>
@@ -409,14 +418,15 @@
               <h3 id="1-函数定义以及空白符："><a href="#1-函数定义以及空白符：" class="headerlink" title="1.函数定义以及空白符："></a>1.函数定义以及空白符：</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">plusAndMin</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>, y <span class="hljs-keyword">int</span>)</span> <span class="hljs-params">(<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>)</span></span> &#123;<br>	<span class="hljs-keyword">return</span> x+y,x-y<br>  &#125;<br><span class="hljs-comment">//也可以</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">plusAndMin</span><span class="hljs-params">(x <span class="hljs-keyword">int</span>, y <span class="hljs-keyword">int</span>)</span> <span class="hljs-params">(plus,min <span class="hljs-keyword">int</span>)</span></span> &#123;<br>	plus = x+y<br>    min = x-y<br>    <span class="hljs-keyword">return</span> <br>  &#125;<br>x,y=plusAndMin(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>)<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li><p>从具有多个返回值的函数中获取特定值 ，使用空白标识符 ‘   <font color=red>_</font>    ‘:</p>
-<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">a, _ := plusAndMin (<span class="hljs-number">10</span>,<span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure></li>
+<li><p>从具有多个返回值的函数中获取特定值 ，使用空白标识符 ‘   <font color="red">_</font>    ‘:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">a, _ := plusAndMin (<span class="hljs-number">10</span>,<span class="hljs-number">10</span>)<br></code></pre></td></tr></table></figure>
+</li>
 <li><p>分配给空白标识符的所有内容都将被默默丢弃，而不会发出警告。您还可以使用空白标识符向结构添加填充:</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">struct</span> &#123;<br>    a <span class="hljs-keyword">byte</span><br>    b <span class="hljs-keyword">byte</span><br>    c <span class="hljs-keyword">byte</span><br>    _ <span class="hljs-keyword">byte</span> <span class="hljs-comment">// padding</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
 <h3 id="2-变量初始化"><a href="#2-变量初始化" class="headerlink" title="2.变量初始化"></a>2.变量初始化</h3><ul>
 <li><code>n := 0</code>:只适合在函数内部</li>
-<li><code>var n int</code>/<code>var n =0</code> :函数内外都可以</li>
+<li><code>var n int</code>&#x2F;<code>var n =0</code> :函数内外都可以</li>
 </ul>
 <h3 id="3-类型转换"><a href="#3-类型转换" class="headerlink" title="3.类型转换"></a>3.类型转换</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">switch</span> a := m &#123;<br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;1&quot;</span>:<br>		<span class="hljs-comment">//TODO 1</span><br>	<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;2&quot;</span>:<br>		<span class="hljs-comment">//TODO 2</span><br>	<span class="hljs-keyword">default</span>:<br>		<span class="hljs-comment">//TODO else</span><br>	&#125;<br></code></pre></td></tr></table></figure>
 

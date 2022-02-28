@@ -190,6 +190,66 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/02/04/%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
+          Go语法基础（四）：更多特性
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/02/04/%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89/" target="_self">
+          
+          
+            
+          
+          1.strings
+strings.Fields()
+1func Fields(str string) []string
+
+返回值：str的子字符串切片或如果str仅包含空格的空白切片。也就是返回值是切片
+例：
+v:= strings.Fields(“go is good”)
+输出为[go is good]
+strings.Fields(&quot;go\nis\tvery \n fun&quot
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-02-04 21:40" pubdate>
+              2022-02-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Go%E7%B3%BB%E5%88%97/">Go系列</a>
+            
+              <a href="/categories/Go%E7%B3%BB%E5%88%97/Go%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">Go语法基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Go/">Go</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/02/04/%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/G%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89/" target="_self">
           Go语法基础（三）：指针,结构体,切片和映射
         </a>
@@ -204,11 +264,13 @@
           1.指针
 其零值为 nil
 
-
 &amp;操作符会生成一个指向其操作数的指针。
 12345678//定义type Vertex struct &#123;	X int	Y int&#125;//访问v := Vertex&#123;1, 2&#125;v.X = 
+
+
+
 ***** 操作符表示指针指向的底层值。这也就是通常所说的间接引用或重定向。
-12345678//定义type Vertex stru
+12345678//定义type Vertex st
         </a>
       </p>
 
